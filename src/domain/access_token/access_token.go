@@ -1,6 +1,8 @@
 package access_token
 
 import (
+	"github.com/alessandroarosio/bookstore_oauth-api/src/utils/errors"
+	"strings"
 	"time"
 )
 
@@ -13,6 +15,20 @@ type AccessToken struct {
 	UserId      int64  `json:"user_id"`
 	ClientId    int64  `json:"client_id"`
 	Expires     int64  `json:"expires"`
+}
+
+func (at *AccessToken) Validate() *errors.RestErr {
+	at.AccessToken = strings.TrimSpace(at.AccessToken)
+	if at.AccessToken == "" {
+		return errors.NewBadRequestError("invalid access token id")
+	} else if at.UserId <= 0 {
+		return errors.NewBadRequestError("invalid user id")
+	} else if at.ClientId <= 0 {
+		return errors.NewBadRequestError("invalid client id")
+	} else if at.Expires <= 0 {
+		return errors.NewBadRequestError("invalid expiration time")
+	}
+	return nil
 }
 
 func GetNewAccessToken() AccessToken {
