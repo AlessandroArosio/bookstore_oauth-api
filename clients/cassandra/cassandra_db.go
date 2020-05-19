@@ -21,7 +21,7 @@ func init() {
 	}
 
 	fmt.Println("connected to Cassandra DB")
-	defer session.Close()
+
 }
 
 func GetSession() *gocql.Session {
