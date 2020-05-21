@@ -1,7 +1,7 @@
 package rest
 
 import (
-	"github.com/mercadolibre/golang-restclient/rest"
+	"github.com/federicoleon/golang-restclient/rest"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"os"
@@ -23,13 +23,13 @@ func TestLoginUserTimeoutFromApi(t *testing.T) {
 		RespBody:     `{}`,
 	})
 
-	repository := userRepository{}
+	repository := NewRestUsersRepository()
 
 	user, err := repository.LoginUser("email@email.com", "pass")
 
 	assert.Nil(t, user)
 	assert.NotNil(t, err)
-	assert.EqualValues(t, http.StatusInternalServerError, err.Status)
+	assert.EqualValues(t, http.StatusInternalServerError, err.Status())
 }
 
 func TestLoginUserInvalidErrorInterface(t *testing.T) {
