@@ -3,7 +3,7 @@ package db
 import (
 	"errors"
 	"github.com/alessandroarosio/bookstore-utils-go/rest_errors"
-	"github.com/alessandroarosio/bookstore_oauth-api/clients/cassandra"
+	"github.com/alessandroarosio/bookstore_oauth-api/src/clients/cassandra"
 	"github.com/alessandroarosio/bookstore_oauth-api/src/domain/access_token"
 	"github.com/gocql/gocql"
 )
